@@ -3,15 +3,15 @@ name: Step 0, Welcome
 # This step triggers after the learner creates a new repository from the template.
 # This workflow updates from step 0 to step 1.
 
-# This will run every time we create push a commit to `main`.
-# The `create` event is added because template repos may not reliably fire a `push`.
+# Note: GitHub does not provide an automatic trigger for "repository created from template".
+# Users must manually trigger this workflow using `workflow_dispatch` from the Actions tab.
+# The `push` trigger serves as a fallback if they make an initial commit.
 # Reference: https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
 on:
   workflow_dispatch:
   push:
     branches:
       - main
-  create:
 
 # Reference: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
 permissions:
