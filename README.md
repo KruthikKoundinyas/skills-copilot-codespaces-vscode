@@ -53,13 +53,12 @@ GitHub Copilot can help you code by offering autocomplete-style suggestions. You
    - For owner, choose your personal account or an organization to host the repository.
    - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
    - Scroll down and click the **Create repository** button at the bottom of the form.
-4. **Important**: After your new repository is created, the course will NOT start automatically. You must manually trigger it:
-   - Go to the **Actions** tab in your new repository
-   - Select **Step 0, Welcome** from the workflow list on the left
-   - Click the **Run workflow** button on the right
-   - Select your branch (keep as `main`) and click **Run workflow**
-   
-   This manual step is required because GitHub does not provide an automatic trigger for repositories created from templates. Once you run the workflow, it will automatically advance through the steps as you complete them.
+4. After your new repository is created, **wait 1-2 minutes** and refresh the page. The course will start automatically.
+
+   If the course doesn't start automatically:
+   - Go to the **Actions** tab
+   - Select **Step 0, Welcome** from the workflow list
+   - Click **Run workflow** to trigger it manually
 
 <footer>
 

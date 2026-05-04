@@ -1,0 +1,46 @@
+name: Step 0 Auto-Trigger
+
+# This workflow auto-triggers the course if it hasn't been started yet.
+# It runs on a schedule to catch newly-created repositories from the template
+# that don't automatically trigger other workflows.
+
+on:
+  schedule:
+    # Run every 5 minutes for the first 30 minutes after repo creation
+    # This ensures the course starts automatically without user intervention
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check_and_start:
+    name: Auto-start course if needed
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check if course should auto-start
+        id: check_step
+        run: |
+          STEP=$(cat ./.github/steps/-step.txt)
+          echo "current_step=$STEP" >> $GITHUB_OUTPUT
+          echo "Step is: $STEP"
+
+      - name: Get commit count
+        id: check_repo_age
+        run: |
+          COMMIT_COUNT=$(git rev-list --all --count)
+          echo "commit_count=$COMMIT_COUNT" >> $GITHUB_OUTPUT
+          echo "Total commits: $COMMIT_COUNT"
+
+      - name: Auto-start if new repo with step 0
+        if: ${{ steps.check_step.outputs.current_step == 0 && steps.check_repo_age.outputs.commit_count <= 5 }}
+        uses: skills/action-update-step@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          from_step: 0
+          to_step: 1
