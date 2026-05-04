@@ -4,12 +4,14 @@ name: Step 0, Welcome
 # This workflow updates from step 0 to step 1.
 
 # This will run every time we create push a commit to `main`.
+# The `create` event is added because template repos may not reliably fire a `push`.
 # Reference: https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
 on:
   workflow_dispatch:
   push:
     branches:
       - main
+  create:
 
 # Reference: https://docs.github.com/en/actions/security-guides/automatic-token-authentication
 permissions:
